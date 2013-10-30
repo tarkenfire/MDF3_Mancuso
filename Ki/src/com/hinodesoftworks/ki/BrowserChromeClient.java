@@ -1,4 +1,4 @@
-package com.hinodesoftwork.ki;
+package com.hinodesoftworks.ki;
 
 public class BrowserChromeClient
 {

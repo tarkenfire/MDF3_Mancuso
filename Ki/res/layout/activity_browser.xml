@@ -24,6 +24,7 @@
         android:id="@+id/navigation_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:lines="1"
         />
     	
 	<ImageButton
@@ -32,14 +33,11 @@
         android:layout_height="wrap_content" 
         />
 	
-	<ImageButton
-        android:id="@+id/nav_tab_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        />
-    
 </LinearLayout>
 
+<WebView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 
 
 
