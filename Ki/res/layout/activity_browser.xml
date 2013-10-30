@@ -1,44 +1,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/browser_activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BrowserActivity"
      >
-
+     
 <LinearLayout 
     android:id="@+id/navigation_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="#000000"
+    android:weightSum="100"
     >
     
     <ImageButton
         android:id="@+id/nav_back_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content" 
         android:src="@drawable/ic_back"
+        android:layout_weight="12"
+        
+        />
+    
+    <ImageButton
+        android:id="@+id/nav_forward_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" 
+        android:src="@drawable/ic_back"
+        android:layout_weight="12"
         />
     
     <EditText 
         android:id="@+id/navigation_field"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:lines="1"
+        android:imeOptions="actionGo"
+        android:inputType="textUri"
+        android:layout_weight="64"
+        android:textColor="#FFFFFF"
         />
     	
 	<ImageButton
         android:id="@+id/nav_history_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:layout_weight="12" 
         />
 	
 </LinearLayout>
 
 <WebView 
+    android:id="@+id/browser_web_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-
-
+    android:layout_height="match_parent"
+    android:layout_below="@id/navigation_bar"
+    />
 
 </RelativeLayout>
