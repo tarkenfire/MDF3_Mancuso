@@ -93,6 +93,12 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		return true;
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
+	{
+		
+	}
+	
 	
 	@Override
 	public boolean onTouch(View view, MotionEvent event)
@@ -117,7 +123,7 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		{
 			if (history.empty())
 			{
-				Toast.makeText(this, R.string.error_no_history, Toast.LENGTH_SHORT);
+				Toast.makeText(this, R.string.error_no_history, Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
@@ -125,12 +131,18 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 				//chronological order
 				ArrayList<String> historyItems = new ArrayList<String>();
 				
+				Log.i("array", history.toString());
+				
 				do 
 				{
 					historyItems.add(history.pop());
 				} while(!history.empty());
 				
 				
+				Intent i = new Intent(this, HistoryActivity.class);
+				i.putStringArrayListExtra("history", historyItems);
+				
+				this.startActivityForResult(i, 0);
 			}
 			
 			break;
