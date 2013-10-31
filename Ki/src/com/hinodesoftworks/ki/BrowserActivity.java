@@ -3,6 +3,7 @@ package com.hinodesoftworks.ki;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Stack;
 
 import android.os.Bundle;
@@ -96,7 +97,12 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
+		Log.i("result", resultCode == RESULT_OK ? "Ok" : "Not Ok");
 		
+		if (resultCode == RESULT_OK)
+		{
+			createAndLoadURL(data.getStringExtra("selected_history"));
+		}
 	}
 	
 	
@@ -138,6 +144,13 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 					historyItems.add(history.pop());
 				} while(!history.empty());
 				
+				//this is a hacky way to deal with a bug where all of 
+				//my history is duplicated in the stack for some reason
+				//(sets don't allow duplicates)
+				LinkedHashSet<String> duplicateFilter = new LinkedHashSet<String>();
+				duplicateFilter.addAll(historyItems);
+				historyItems.clear();
+				historyItems.addAll(duplicateFilter);
 				
 				Intent i = new Intent(this, HistoryActivity.class);
 				i.putStringArrayListExtra("history", historyItems);
@@ -168,9 +181,15 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 			if (!input.startsWith("http://") && !input.startsWith("https://"))
 			{
 				browserWindow.loadUrl("http://" + input);
+				history.push("http://" + input);
+			}
+			else
+			{
+				browserWindow.loadUrl(input);
+				history.push(input);
 			}
 			
-			history.push("http://" + input);
+			
 		}
 		else
 		{

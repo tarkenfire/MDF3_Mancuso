@@ -45,6 +45,7 @@ public class HistoryActivity extends Activity implements OnClickListener, OnItem
 		
 		historyList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, history));
 		
+		historyList.setOnItemClickListener(this);
 	}
 	
 	
@@ -52,8 +53,8 @@ public class HistoryActivity extends Activity implements OnClickListener, OnItem
 	@Override
 	public void onClick(View v)
 	{
-		Intent returnIntent = new Intent();
-		setResult(RESULT_CANCELED, returnIntent);        
+		Intent i = new Intent();
+		setResult(RESULT_CANCELED, i);        
 		finish();
 	}
 
@@ -61,7 +62,10 @@ public class HistoryActivity extends Activity implements OnClickListener, OnItem
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
-		// TODO Auto-generated method stub
+		Intent i = new Intent();
+		i.putExtra("selected_history", history.get(position));
+		setResult(RESULT_OK,i);
+		finish();
 		
 	}
 
