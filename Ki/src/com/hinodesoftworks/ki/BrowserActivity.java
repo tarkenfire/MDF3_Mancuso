@@ -82,6 +82,14 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		browserWindow.setWebViewClient(new BrowserViewClient());
 		browserWindow.setWebChromeClient(new BrowserChromeClient());
 		
+		//check if this was sent as an implicit intent
+		Intent i = this.getIntent();
+		if (i.getAction().equals(Intent.ACTION_VIEW))
+		{
+			createAndLoadURL(i.getStringExtra("url"));
+		}
+		
+		
 		//set state of buttons
 		checkHistories();
 	}
