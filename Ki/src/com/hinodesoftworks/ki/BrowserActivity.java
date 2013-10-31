@@ -1,11 +1,13 @@
 package com.hinodesoftworks.ki;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Stack;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -13,23 +15,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
 public class BrowserActivity extends Activity implements OnTouchListener, OnClickListener
-{
-	//current histories
-	Stack<String> backHistory;
-	Stack<String> forwardHistory;
-	
-	//histories to persist
-	ArrayList<String> historyToSave;
-	
+{	
 	//ui handles
 	RelativeLayout container;
 	WebView browserWindow;
@@ -37,12 +36,19 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	ImageButton backButton;
 	ImageButton forwardButton;
 	ImageButton historyButton;
+	ProgressBar progressBar;
+	
+	//general variables
+	Stack<String> history;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_browser);
+		
+		history = new Stack<String>();
 		
 		//grab UI handles
 		container = (RelativeLayout)findViewById(R.id.browser_activity_container);
@@ -51,6 +57,7 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		backButton = (ImageButton)findViewById(R.id.nav_back_button);
 		forwardButton = (ImageButton)findViewById(R.id.nav_forward_button);
 		historyButton = (ImageButton)findViewById(R.id.nav_history_button);
+		progressBar = (ProgressBar)findViewById(R.id.progress_bar);
 		
 		//set listeners
 	
@@ -66,11 +73,16 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
             public boolean onEditorAction(TextView v, int actionId,
                             KeyEvent event)
             {
-            		browseToUrl(createUrl(v.getText().toString()));
-                    return true;
+            		createAndLoadURL(v.getText().toString());
+                    return false;
             }
         });
 		
+		browserWindow.setWebViewClient(new BrowserViewClient());
+		browserWindow.setWebChromeClient(new BrowserChromeClient());
+		
+		//set state of buttons
+		checkHistories();
 	}
 
 	@Override
@@ -91,37 +103,118 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	@Override
 	public void onClick(View v)
 	{
-		// TODO Auto-generated method stub
+		switch(v.getId())
+		{
+		case R.id.nav_back_button:
+			browserWindow.goBack();
+			if (!history.empty())
+				history.pop();
+			break;
+		case R.id.nav_forward_button:
+			browserWindow.goForward();
+			break;
+		case R.id.nav_history_button:
+		{
+			if (history.empty())
+			{
+				Toast.makeText(this, R.string.error_no_history, Toast.LENGTH_SHORT);
+			}
+			else
+			{
+				//I use a stack then pop them into an array to maintain the correct
+				//chronological order
+				ArrayList<String> historyItems = new ArrayList<String>();
+				
+				do 
+				{
+					historyItems.add(history.pop());
+				} while(!history.empty());
+				
+				
+			}
+			
+			break;
+		}
+			
+		}
 		
+		checkHistories();
 	}
 	
 	//private methods
-	private URL createUrl(String input)
-	{
+	private void createAndLoadURL(String input)
+	{	
 		String urlRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
 		//                 http/s  :// (or none) any # of letters . any letters . /any sub-dirs/tlds
-		
-		
-		//TODO TESTING CODE. REPLACE
-		browserWindow.setWebViewClient(new WebViewClient(){@Override public boolean shouldOverrideUrlLoading (WebView view, String url){return false;}});
+		// matches: google.com, www.google.com, http://www.google.com, http://google.com, play.google.com
+		// non-matches ftp://www.google.com, dog, muffins.
 		
 		if (input.matches(urlRegex))
 		{
 			Log.i("regex", "match");
-			browserWindow.loadUrl("http://www.google.com");
+			//check for protocol and add if missing.
+			if (!input.startsWith("http://") && !input.startsWith("https://"))
+			{
+				browserWindow.loadUrl("http://" + input);
+			}
+			
+			history.push("http://" + input);
 		}
 		else
 		{
 			Log.i("regex", "no match");
-			browserWindow.loadUrl("http://yahoo.com");
+			//google parses + signs into whitespace sent to their search url.
+			//so I don't need to do it in my code.
+			browserWindow.loadUrl("http://www.google.com/search?q=" + input);
+			
+			history.push("http://www.google.com/search?q=" + input);
 		}
 		
-		return null;
+		checkHistories();
 	}
 	
-	private void browseToUrl(URL url)
+	private void checkHistories()
 	{
+		//check forward history.
+		if (browserWindow.canGoForward())
+			forwardButton.setEnabled(true);
+		else
+			forwardButton.setEnabled(false);
 		
+		//check backward history
+		if (browserWindow.canGoBack())
+			backButton.setEnabled(true);
+		else
+			backButton.setEnabled(false);
 	}
-
+	
+	
+	//private classes / async tasks
+	private class BrowserChromeClient extends WebChromeClient
+	{
+		public void onProgressChanged(WebView view, int progress) 
+		{
+			progressBar.setProgress(progress);
+			
+			
+			//set to 0 if done
+			if (progress == 100)
+			{
+				progressBar.setProgress(0);
+			}
+		}
+	}
+	
+	private class BrowserViewClient extends WebViewClient
+	{
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView v, String url)
+		{
+			//this is a full web browser; and all non http urls will not be loaded
+			//therefore, never override URL loading
+			
+			return false;
+		}
+	}
+	
 }

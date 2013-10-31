@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".BrowserActivity"
      >
-     
+         
 <LinearLayout 
     android:id="@+id/navigation_bar"
     android:layout_width="match_parent"
@@ -53,11 +53,21 @@
 	
 </LinearLayout>
 
+<ProgressBar 
+    android:id="@+id/progress_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/navigation_bar"
+    android:minHeight="5dip"
+    android:maxHeight="5dip"
+    style="@android:style/Widget.ProgressBar.Horizontal"
+    />
+
 <WebView 
     android:id="@+id/browser_web_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/navigation_bar"
+    android:layout_below="@id/progress_bar"
     />
 
 </RelativeLayout>

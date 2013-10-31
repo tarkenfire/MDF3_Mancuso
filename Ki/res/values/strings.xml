@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     
     <string name="omnibox">Omnibox</string>
+    <string name="error_no_history">No history to display.</string>
 
 </resources>
