@@ -1,3 +1,10 @@
+/* 
+ * Date: Oct 31, 2013
+ * Project: Ki
+ * Package: com.hinodesoftworks.ki
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.ki;
 
 import java.util.ArrayList;
@@ -8,8 +15,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -32,6 +37,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
+/**
+ * The Class BrowserActivity.
+ */
 public class BrowserActivity extends Activity implements OnTouchListener, OnClickListener
 {	
 	//ui handles
@@ -56,6 +64,9 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	//variables needed for touch events
 	GestureDetector gestureDetector;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -117,6 +128,9 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		checkHistories();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -125,6 +139,9 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
@@ -137,12 +154,18 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see android.view.View.OnTouchListener#onTouch(android.view.View, android.view.MotionEvent)
+	 */
 	@Override
 	public boolean onTouch(View view, MotionEvent event)
 	{
 		return gestureDetector.onTouchEvent(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v)
 	{
@@ -211,6 +234,11 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	}
 	
 	//private methods
+	/**
+	 * Creates a URL from a string and loads it into the webview.
+	 *
+	 * @param input the string form of a url or search term
+	 */
 	private void createAndLoadURL(String input)
 	{	
 		String urlRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
@@ -248,16 +276,25 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		checkHistories();
 	}
 	
+	/**
+	 * Refresh current page.
+	 */
 	private void refreshPage()
 	{
 		browserWindow.reload();
 	}
 	
+	/**
+	 * Close current page.
+	 */
 	private void closePage()
 	{
 		browserWindow.loadUrl("about:blank");
 	}
 	
+	/**
+	 * Check if there is a history in the webview and enables/disables buttons.
+	 */
 	private void checkHistories()
 	{
 		//check forward history.
@@ -274,8 +311,15 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	}
 	
 	//private classes / async tasks
+	/**
+	 * The Class BrowserChromeClient.
+	 */
 	private class BrowserChromeClient extends WebChromeClient
 	{
+		
+		/* (non-Javadoc)
+		 * @see android.webkit.WebChromeClient#onProgressChanged(android.webkit.WebView, int)
+		 */
 		@Override
 		public void onProgressChanged(WebView view, int progress) 
 		{
@@ -289,6 +333,9 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 			}
 		}
 		
+		/* (non-Javadoc)
+		 * @see android.webkit.WebChromeClient#onReceivedTitle(android.webkit.WebView, java.lang.String)
+		 */
 		@Override
 		public void onReceivedTitle(WebView view, String title)
 		{
@@ -297,8 +344,15 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		
 	}
 	
+	/**
+	 * The Class BrowserViewClient.
+	 */
 	private class BrowserViewClient extends WebViewClient
 	{
+		
+		/* (non-Javadoc)
+		 * @see android.webkit.WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView, java.lang.String)
+		 */
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView v, String url)
 		{
@@ -308,6 +362,9 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 			return false;
 		}
 		
+		/* (non-Javadoc)
+		 * @see android.webkit.WebViewClient#onPageFinished(android.webkit.WebView, java.lang.String)
+		 */
 		@Override
 		public void onPageFinished(WebView view, String url)
 		{
@@ -315,14 +372,24 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		}
 	}
 	
+	/**
+	 * The Class BrowserGestureDetector.
+	 */
 	private class BrowserGestureDetector extends SimpleOnGestureListener
 	{	
+		
+		/* (non-Javadoc)
+		 * @see android.view.GestureDetector.SimpleOnGestureListener#onDown(android.view.MotionEvent)
+		 */
 		@Override
 		public boolean onDown(MotionEvent e)
 		{
 			return true;
 		}
 		
+        /* (non-Javadoc)
+         * @see android.view.GestureDetector.SimpleOnGestureListener#onFling(android.view.MotionEvent, android.view.MotionEvent, float, float)
+         */
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) 
         {

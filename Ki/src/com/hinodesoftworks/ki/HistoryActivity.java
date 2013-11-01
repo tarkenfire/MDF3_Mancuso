@@ -17,11 +17,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
+/**
+ * The Class HistoryActivity.
+ */
 public class HistoryActivity extends Activity implements OnClickListener, OnItemClickListener
 {
 	//ui handle
@@ -30,6 +31,9 @@ public class HistoryActivity extends Activity implements OnClickListener, OnItem
 	//other vars
 	ArrayList<String> history;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -48,8 +52,9 @@ public class HistoryActivity extends Activity implements OnClickListener, OnItem
 		historyList.setOnItemClickListener(this);
 	}
 	
-	
-	//private methods
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v)
 	{
@@ -59,6 +64,9 @@ public class HistoryActivity extends Activity implements OnClickListener, OnItem
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
