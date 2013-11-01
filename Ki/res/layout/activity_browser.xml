@@ -21,15 +21,16 @@
         android:layout_height="wrap_content" 
         android:src="@drawable/ic_back"
         android:layout_weight="12"
-        
+        android:contentDescription="@string/access_back"
         />
     
     <ImageButton
         android:id="@+id/nav_forward_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content" 
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_forward"
         android:layout_weight="12"
+        android:contentDescription="@string/access_forward"
         />
     
     <EditText 
@@ -41,14 +42,18 @@
         android:inputType="textUri"
         android:layout_weight="64"
         android:textColor="#FFFFFF"
+        android:hint="@string/hint_url"
+        android:maxLines="1"
+        android:focusable="true"
         />
     	
 	<ImageButton
         android:id="@+id/nav_history_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        android:layout_weight="12" 
+        android:src="@drawable/ic_history"
+        android:layout_weight="12"
+        android:contentDescription="@string/access_history"
         />
 	
 </LinearLayout>
@@ -76,7 +81,8 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
-    android:src="@drawable/ic_back"
+    android:src="@drawable/ic_touch"
+    android:contentDescription="@string/access_touch"
     />
 
 <RelativeLayout 
@@ -92,7 +98,7 @@
 	    android:id="@+id/touch_mode_cancel_button"
 	    android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:text="Cancel"
+    	android:text="@string/button_cancel"
     	android:textColor="#FFFFFF"
     	android:layout_centerInParent="true"
 	    />
@@ -102,7 +108,7 @@
 	    android:layout_width="200dp"
     	android:layout_height="wrap_content"
     	android:layout_above="@id/touch_mode_cancel_button"
-    	android:text="This is an example sentence to test the app position."
+    	android:text="@string/instructions"
     	android:textAlignment="center"
     	android:textColor="#FFFFFF"
     	android:layout_centerInParent="true"

@@ -10,4 +10,10 @@
     <string name="button_cancel">Cancel</string>
     <string name="instructions">Swipe left torwards the RED bar to close the current webpage. Swipe right torwards the GREEN bar to refresh the current page.</string>
     
+    <string name="hint_url">Enter a URL or Search Term</string>
+    
+    <string name="access_touch">Touch Mode</string>
+    <string name="access_back">Back</string>
+    <string name="access_forward">Forward</string>
+    <string name="access_history">History</string>
 </resources>

@@ -1,17 +1,17 @@
 package com.hinodesoftworks.ki;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Stack;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -19,14 +19,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -195,6 +194,12 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		}
 		case R.id.touch_mode_button:
 			touchCanvas.setVisibility(View.VISIBLE);
+			
+			//close keyboard.
+			InputMethodManager imm = (InputMethodManager)getSystemService(
+						      Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(navigationField.getWindowToken(), 0);
+			
 			break;
 		case R.id.touch_mode_cancel_button:
 			touchCanvas.setVisibility(View.GONE);
@@ -271,6 +276,7 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	//private classes / async tasks
 	private class BrowserChromeClient extends WebChromeClient
 	{
+		@Override
 		public void onProgressChanged(WebView view, int progress) 
 		{
 			progressBar.setProgress(progress);
@@ -282,6 +288,13 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 				progressBar.setProgress(0);
 			}
 		}
+		
+		@Override
+		public void onReceivedTitle(WebView view, String title)
+		{
+			setTitle("Ki - " + title);
+		}
+		
 	}
 	
 	private class BrowserViewClient extends WebViewClient
@@ -293,6 +306,12 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 			//therefore, never override URL loading
 			
 			return false;
+		}
+		
+		@Override
+		public void onPageFinished(WebView view, String url)
+		{
+			navigationField.setText(url);
 		}
 	}
 	
