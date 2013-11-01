@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -20,8 +23,10 @@ import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,8 +44,18 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	ImageButton historyButton;
 	ProgressBar progressBar;
 	
+	//touch Ui handles
+	ImageButton touchModeButton;
+	Button touchCancelButton;
+	RelativeLayout touchCanvas;
+	TextView backSlide;
+	TextView forwardSlide;
+	
 	//general variables
 	Stack<String> history;
+	
+	//variables needed for touch events
+	GestureDetector gestureDetector;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -50,6 +65,7 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		setContentView(R.layout.activity_browser);
 		
 		history = new Stack<String>();
+		gestureDetector = new GestureDetector(this, new BrowserGestureDetector());
 		
 		//grab UI handles
 		container = (RelativeLayout)findViewById(R.id.browser_activity_container);
@@ -59,13 +75,21 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		forwardButton = (ImageButton)findViewById(R.id.nav_forward_button);
 		historyButton = (ImageButton)findViewById(R.id.nav_history_button);
 		progressBar = (ProgressBar)findViewById(R.id.progress_bar);
+		touchModeButton = (ImageButton)findViewById(R.id.touch_mode_button);
+		touchCancelButton = (Button)findViewById(R.id.touch_mode_cancel_button);
+		touchCanvas = (RelativeLayout)findViewById(R.id.touch_canvas);
+		backSlide = (TextView)findViewById(R.id.back_slide_bar);
+		forwardSlide = (TextView)findViewById(R.id.forward_slide_bar);
+		
 		
 		//set listeners
 	
-		//container.setOnTouchListener(this);
+		touchCanvas.setOnTouchListener(this);
 		backButton.setOnClickListener(this);
 		forwardButton.setOnClickListener(this);
 		historyButton.setOnClickListener(this);
+		touchModeButton.setOnClickListener(this);
+		touchCancelButton.setOnClickListener(this);
 		
 		//set handlers
 		navigationField.setOnEditorActionListener(new OnEditorActionListener()
@@ -79,6 +103,7 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
             }
         });
 		
+		
 		browserWindow.setWebViewClient(new BrowserViewClient());
 		browserWindow.setWebChromeClient(new BrowserChromeClient());
 		
@@ -88,7 +113,6 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		{
 			createAndLoadURL(i.getStringExtra("url"));
 		}
-		
 		
 		//set state of buttons
 		checkHistories();
@@ -117,7 +141,7 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 	@Override
 	public boolean onTouch(View view, MotionEvent event)
 	{
-		return false;
+		return gestureDetector.onTouchEvent(event);
 	}
 
 	@Override
@@ -166,8 +190,15 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 				this.startActivityForResult(i, 0);
 			}
 			
+			
 			break;
 		}
+		case R.id.touch_mode_button:
+			touchCanvas.setVisibility(View.VISIBLE);
+			break;
+		case R.id.touch_mode_cancel_button:
+			touchCanvas.setVisibility(View.GONE);
+			break;
 			
 		}
 		
@@ -212,6 +243,16 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		checkHistories();
 	}
 	
+	private void refreshPage()
+	{
+		browserWindow.reload();
+	}
+	
+	private void closePage()
+	{
+		browserWindow.loadUrl("about:blank");
+	}
+	
 	private void checkHistories()
 	{
 		//check forward history.
@@ -226,7 +267,6 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 		else
 			backButton.setEnabled(false);
 	}
-	
 	
 	//private classes / async tasks
 	private class BrowserChromeClient extends WebChromeClient
@@ -255,5 +295,37 @@ public class BrowserActivity extends Activity implements OnTouchListener, OnClic
 			return false;
 		}
 	}
+	
+	private class BrowserGestureDetector extends SimpleOnGestureListener
+	{	
+		@Override
+		public boolean onDown(MotionEvent e)
+		{
+			return true;
+		}
+		
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) 
+        {
+			if (velocityX > 0)
+			{
+				Log.i("fling", "right");
+				refreshPage();
+				touchCanvas.setVisibility(View.GONE);
+				
+			}
+			else
+			{
+				Log.i("fling", "left");
+				closePage();
+				touchCanvas.setVisibility(View.GONE);
+			}        	
+			
+        	return true;
+        }
+
+	}
+	
+	
 	
 }

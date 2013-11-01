@@ -7,5 +7,7 @@
     <string name="error_no_history">No history to display.</string>
 
     <string name="button_close">Close</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="instructions">Swipe left torwards the RED bar to close the current webpage. Swipe right torwards the GREEN bar to refresh the current page.</string>
     
 </resources>

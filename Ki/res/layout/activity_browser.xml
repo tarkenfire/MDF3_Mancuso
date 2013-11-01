@@ -70,4 +70,61 @@
     android:layout_below="@id/progress_bar"
     />
 
+<ImageButton
+    android:id="@+id/touch_mode_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:src="@drawable/ic_back"
+    />
+
+<RelativeLayout 
+    android:id="@+id/touch_canvas"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="#000000"
+    
+    >
+	
+	<Button 
+	    android:id="@+id/touch_mode_cancel_button"
+	    android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="Cancel"
+    	android:textColor="#FFFFFF"
+    	android:layout_centerInParent="true"
+	    />
+	
+	<TextView 
+	    android:id="@+id/touch_instructions"
+	    android:layout_width="200dp"
+    	android:layout_height="wrap_content"
+    	android:layout_above="@id/touch_mode_cancel_button"
+    	android:text="This is an example sentence to test the app position."
+    	android:textAlignment="center"
+    	android:textColor="#FFFFFF"
+    	android:layout_centerInParent="true"
+	    />
+	
+	<TextView
+	    android:id="@+id/forward_slide_bar"
+	    android:layout_width="75dp"
+	    android:layout_height="match_parent"
+	    android:background="#00FF00"
+	    android:layout_alignParentRight="true" />
+	
+	<TextView
+	    android:id="@+id/back_slide_bar"
+	    android:layout_width="75dp"
+	    android:layout_height="match_parent"
+	    android:background="#FF0000"
+	    android:layout_alignParentLeft="true"
+	     />
+	
+		
+    
+</RelativeLayout>
+
 </RelativeLayout>
