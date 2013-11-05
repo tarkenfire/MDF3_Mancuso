@@ -1,3 +1,10 @@
+/* 
+ * Date: Nov 4, 2013
+ * Project: Ongaku
+ * Package: com.hinodesoftworks.ongaku
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.ongaku;
 
 import android.app.Service;

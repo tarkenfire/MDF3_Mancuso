@@ -3,6 +3,7 @@
 
     <string name="app_name">Ongaku Music Player</string>
     <string name="action_settings">Settings</string>
-
+	
+    <string name="library_header">All Music On Device</string>
 
 </resources>

@@ -3,4 +3,20 @@
     android:id="@+id/library_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MediaLibraryActivity"></RelativeLayout>
+    tools:context=".MediaLibraryActivity">
+    
+    <TextView 
+        android:id="@+id/library_header"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="@string/library_header"
+        />
+    
+    <ListView
+        android:id="@+id/library_album_list"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	   	android:layout_below="@id/library_header"        
+         />
+    
+</RelativeLayout>
