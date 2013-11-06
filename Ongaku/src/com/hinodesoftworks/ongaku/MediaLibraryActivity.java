@@ -21,6 +21,8 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,6 +33,9 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	public static MimeTypeMap mtm = MimeTypeMap.getSingleton();
 	private ArrayList<File> musicFileList;
 	
+	//ui handles
+	ListView mediaList;
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -40,6 +45,9 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_media_library);
+		
+		//grab ui handles
+		mediaList = (ListView)findViewById(R.id.library_album_list);
 		
 		//init variables
 		musicFileList = new ArrayList<File>();
@@ -53,6 +61,17 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 			{
 				searchDirectoryRecursive(new File("/mnt"));
 				Log.i("Total track count", String.valueOf(musicFileList.size()));
+				
+				runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						onFileSearchComplete();
+						
+						
+					}
+				});
 			}
 			
 		}).start();
@@ -81,7 +100,8 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	//private methods
 	private void onFileSearchComplete()
 	{
-		
+		AudioFileArrayAdapter adapter = new AudioFileArrayAdapter(this, R.layout.media_list_item, musicFileList);
+		mediaList.setAdapter(adapter);
 	}
 	
 	

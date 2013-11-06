@@ -10,13 +10,17 @@
         android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:text="@string/library_header"
+    	android:textSize="20sp"
+    	android:textAlignment="center"
         />
     
     <ListView
         android:id="@+id/library_album_list"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-	   	android:layout_below="@id/library_header"        
+	   	android:layout_below="@id/library_header"
+	   	android:background="#000000" 
+	   	android:listSelector="@drawable/list_item_background_selector"
          />
     
 </RelativeLayout>
