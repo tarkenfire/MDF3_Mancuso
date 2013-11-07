@@ -24,6 +24,7 @@
         </activity>
         
         <activity android:name="com.hinodesoftworks.ongaku.MusicPlayerActivity"></activity>
+        <service android:name="com.hinodesoftworks.ongaku.MusicService"></service>
     </application>
 
 </manifest>
