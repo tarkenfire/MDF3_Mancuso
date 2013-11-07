@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100" >
+    
+	<ImageView
+	    android:id="@+id/player_album_art_view"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="45"
+	    android:src="@drawable/ic_launcher"
+	     />
+	
+	<SeekBar
+		    android:id="@+id/player_progress_bar"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:minHeight="5dip"
+		    android:maxHeight="5dip"
+		    style="@android:style/Widget.ProgressBar.Horizontal"
+		    android:layout_weight="10"
+		    />
+	
+	<RelativeLayout
+	    android:id="@+id/player_time_section"
+	    android:layout_width="match_parent" 
+	    android:layout_height="0dp"
+	    android:layout_weight="5">    
+	    
+	    <TextView
+	        android:id="@+id/player_current_time_display"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:text="0:00"
+	         />
+
+		<TextView
+	        android:id="@+id/player_total_time_display"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:text="0:00"
+	         />
+	    
+	</RelativeLayout>
+	
+	
+	<TextView 
+	    android:id="@+id/player_track_name_view"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp" 
+	    android:layout_weight="10"
+	    />	
+	    
+	<TextView 
+	    android:id="@+id/player_artist_name_view"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="5" 
+	    />
+	
+	<TextView 
+	    android:id="@+id/player_album_name_view"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="5" 
+	    />
+	
+	<LinearLayout
+	    android:id="@+id/player_control_section"
+	    android:layout_width="match_parent" 
+	    android:layout_height="0dp"
+	    android:orientation="horizontal"
+	    android:layout_weight="20">
+		
+	    <ImageButton
+	        android:id="@+id/player_back_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/ic_launcher" />
+	    
+	    <ImageButton
+	        android:id="@+id/player_play_pause_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/ic_launcher" />
+	    
+	    <ImageButton
+	        android:id="@+id/player_forward_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/ic_launcher" />
+	</LinearLayout>
+    
+    
+</LinearLayout>

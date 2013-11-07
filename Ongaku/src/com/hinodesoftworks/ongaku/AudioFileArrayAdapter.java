@@ -76,32 +76,14 @@ public class AudioFileArrayAdapter extends ArrayAdapter<File>
 	
 	
 	//utility methods
-	public String getDurationStringFromMilSeconds(int duration)
+	public static String getDurationStringFromMilSeconds(int duration)
 	{
 		StringBuilder sb = new StringBuilder();
-		int milSeconds = duration;
-		int hours = 0, minutes = 0, seconds = 0;
+		int milSeconds = duration,
+		hours = ((milSeconds / (1000*60*60)) % 24), // mils / (mins calc below) 24 hours in a day 
+		minutes = ((milSeconds / (1000*60)) % 60), //mils / (mils calc below).60 mins to an hour  
+		seconds = (milSeconds / 1000) % 60; //1000 ms to a min, 60 secs to a min. 
 		
-		//get seconds - 1000ms to a second.
-		while (milSeconds > 1000)
-		{
-			seconds++;
-			milSeconds -= 1000;
-		}
-		
-		//get minutes 1 to 60 seconds
-		while (seconds > 60)
-		{
-			minutes++;
-			seconds -= 60;
-		}
-		
-		//get hours
-		while (minutes > 60)
-		{
-			hours++;
-			minutes -= 60;
-		}
 		
 		//finally, construct string - disregard millisecond precision.
 		if (hours > 0)
@@ -109,8 +91,6 @@ public class AudioFileArrayAdapter extends ArrayAdapter<File>
 			sb.append(hours); 
 			sb.append(":");
 		}
-		
-		
 		
 		//normalize minutes if media file longer than 1 hour (podcast, dj mix)
 		if (hours > 1 && minutes < 10)
@@ -125,8 +105,6 @@ public class AudioFileArrayAdapter extends ArrayAdapter<File>
 			sb.append("0" + String.valueOf(seconds));
 		else
 			sb.append(seconds);
-		
-		
 		
 		return sb.toString();
 	}

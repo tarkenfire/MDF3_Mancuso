@@ -11,9 +11,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +21,6 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 // TODO: Auto-generated Javadoc
@@ -52,6 +51,8 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 		//init variables
 		musicFileList = new ArrayList<File>();
 		
+		//set listeners
+		mediaList.setOnItemClickListener(this);
 		
 		//get music file contents
 		new Thread(new Runnable()
@@ -67,9 +68,7 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 					@Override
 					public void run()
 					{
-						onFileSearchComplete();
-						
-						
+						onFileSearchComplete();	
 					}
 				});
 			}
@@ -93,6 +92,9 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
+		Intent i = new Intent(this, MusicPlayerActivity.class);
+		i.putExtra("file", musicFileList.get(position));
+		startActivity(i);
 		
 	}
 
@@ -192,8 +194,5 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 		String ext = this.getExtension(fileUri.toString());
 		return mtm.getMimeTypeFromExtension(ext);
 	}
-
-
-
-
+	
 }
