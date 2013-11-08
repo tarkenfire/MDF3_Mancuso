@@ -39,6 +39,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 	//general vars
 	MusicService musicService;
 	boolean isServiceBound = false;
+	public boolean isActivityNew = false;
 	
 	//ui handles
 	ImageView albumArtView;
@@ -65,6 +66,8 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_music_player);
 		
+		isActivityNew = (savedInstanceState == null);
+		
 		//grab ui handles
 		albumArtView = (ImageView)findViewById(R.id.player_album_art_view);
 		progressBar = (SeekBar)findViewById(R.id.player_progress_bar);
@@ -83,33 +86,42 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		playerForwardButton.setOnClickListener(this);
 		progressBar.setOnSeekBarChangeListener(this);
 		
-		//get file for music track to play
-		Intent i = this.getIntent();
-		File musicFile = (File) i.getSerializableExtra("file");
-		
-		//get and set fields from track
-		MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-		mmr.setDataSource(musicFile.getAbsolutePath());
-		
-		trackNameView.setText(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
-		artistNameView.setText(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
-		albumNameView.setText(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
-		
-		totalTimeDisplay.setText(AudioFileArrayAdapter.getDurationStringFromMilSeconds(Integer.valueOf(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))));
-		
-		byte[] imageBytes = mmr.getEmbeddedPicture();
-		
-		if (imageBytes != null)
+		if (savedInstanceState == null)
 		{
-			albumArtView.setImageDrawable(new BitmapDrawable(this.getResources() ,BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length)));
+			//get file for music track to play
+			Intent i = this.getIntent();
+			File musicFile = (File) i.getSerializableExtra("file");
+			
+			//get and set fields from track
+			MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+			mmr.setDataSource(musicFile.getAbsolutePath());
+			
+			trackNameView
+					.setText(mmr
+							.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+			artistNameView
+					.setText(mmr
+							.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
+			albumNameView
+					.setText(mmr
+							.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
+			totalTimeDisplay
+					.setText(AudioFileArrayAdapter.getDurationStringFromMilSeconds(Integer.valueOf(mmr
+							.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))));
+			
+			byte[] imageBytes = mmr.getEmbeddedPicture();
+			if (imageBytes != null)
+			{
+				albumArtView.setImageDrawable(new BitmapDrawable(this
+						.getResources(), BitmapFactory.decodeByteArray(
+						imageBytes, 0, imageBytes.length)));
+			}
+			//service will be both started AND bound, to allow for
+			//leaving the activity while still running the service
+			//while still having a binder to access the service.
+			Intent serviceIntent = new Intent(this, MusicService.class);
+			this.startService(serviceIntent);
 		}
-		
-		//service will be both started AND bound, to allow for
-		//leaving the activity while still running the service
-		//while still having a binder to access the service.
-		Intent serviceIntent = new Intent(this, MusicService.class);
-		this.startService(serviceIntent);
-		
 		//set action bar icon as backward navigation.
 		//TODO doesn't work.
 	    getActionBar().setDisplayHomeAsUpEnabled(true);		
@@ -121,7 +133,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		super.onStart();
 		
 		Intent serviceIntent = new Intent(this, MusicService.class);
-		this.bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE);
+		this.bindService(serviceIntent, serviceConnection, 0);
 	}
 	
 	@Override
@@ -160,6 +172,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 			}
 			else
 			{
+				musicService.pauseTrack();
 				musicService.playTrack();
 			}
 			break;
@@ -221,6 +234,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		Intent i = this.getIntent();
 		File musicFile = (File) i.getSerializableExtra("file");
 		musicService.setPlayerInstanceReference(this);
+		musicService.setFileReference(musicFile);
 		musicService.prepareMediaPlayer(musicFile.getAbsolutePath());
 	}
 	
