@@ -7,13 +7,17 @@
  */
 package com.hinodesoftworks.ongaku;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 
 import android.util.Log;
 import android.view.Menu;
@@ -96,6 +100,22 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 		i.putExtra("file", musicFileList.get(position));
 		startActivity(i);
 		
+		File history = new File(Environment.getExternalStorageDirectory(), "ongaku_history.txt");
+		File musicFile = musicFileList.get(position);
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(history, true));
+			writer.write(musicFile.getAbsolutePath());
+			writer.newLine();
+			writer.flush();
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	
@@ -104,6 +124,13 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	{
 		AudioFileArrayAdapter adapter = new AudioFileArrayAdapter(this, R.layout.media_list_item, musicFileList);
 		mediaList.setAdapter(adapter);
+	}
+	
+	//public methods
+	public void onHistoryClick(View v)
+	{
+		Intent i = new Intent(this, HistoryActivity.class);
+		startActivity(i);
 	}
 	
 	

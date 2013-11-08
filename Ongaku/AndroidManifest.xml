@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,7 @@
         </activity>
         
         <activity android:name="com.hinodesoftworks.ongaku.MusicPlayerActivity"></activity>
+        <activity android:name="com.hinodesoftworks.ongaku.HistoryActivity"></activity>
         <service android:name="com.hinodesoftworks.ongaku.MusicService"></service>
     </application>
 
