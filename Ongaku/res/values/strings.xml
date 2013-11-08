@@ -4,6 +4,14 @@
     <string name="app_name">Ongaku Music Player</string>
     <string name="action_settings">Settings</string>
 	
-    <string name="library_header">All Music On Device</string>
-
+    <string name="library_header">All Music On SD Card(s)</string>
+	<string name="button_history">History</string>
+	
+	<string name="zero_time">0:00</string>
+	
+	<string name="access_album_art">Album Art</string>
+	<string name="access_back_button">Skip Back In Song</string>
+	<string name="access_play_pause_button">Play/Pause Song</string>
+	<string name="access_forward_button">Play/Pause Song</string>
+	
 </resources>

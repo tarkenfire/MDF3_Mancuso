@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="100" >
+    android:weightSum="100"
+    android:background="#000000" >
     
 	<ImageView
 	    android:id="@+id/player_album_art_view"
+	    android:paddingTop="10dp"
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
 	    android:layout_weight="45"
 	    android:src="@drawable/ic_launcher"
+	    android:contentDescription="@string/access_album_art"
 	     />
 	
 	<SeekBar
@@ -21,6 +24,8 @@
 		    android:maxHeight="5dip"
 		    style="@android:style/Widget.ProgressBar.Horizontal"
 		    android:layout_weight="10"
+		    android:progressDrawable="@drawable/seek_bar_custom"
+		    android:thumb="@drawable/thumb"
 		    />
 	
 	<RelativeLayout
@@ -34,6 +39,9 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
+	        android:text="@string/zero_time"
+	        android:textColor="#FFFFFF"
+	        android:layout_marginLeft="10dp"
 	         />
 
 		<TextView
@@ -41,6 +49,9 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
+	        android:text="@string/zero_time"
+	        android:textColor="#FFFFFF"
+	        android:layout_marginLeft="10dp"
 	         />
 	    
 	</RelativeLayout>
@@ -51,13 +62,21 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp" 
 	    android:layout_weight="10"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:textColor="#FFFFFF"
+	    android:textSize="20sp"
 	    />	
 	    
 	<TextView 
 	    android:id="@+id/player_artist_name_view"
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
-	    android:layout_weight="5" 
+	    android:layout_weight="5"
+	   	android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:textColor="#FFFFFF"
+	    android:textSize="18sp" 
 	    />
 	
 	<TextView 
@@ -65,6 +84,10 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
 	    android:layout_weight="5" 
+	   	android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:textColor="#FFFFFF"
+	    android:textSize="15sp"
 	    />
 	
 	<LinearLayout
@@ -72,26 +95,35 @@
 	    android:layout_width="match_parent" 
 	    android:layout_height="0dp"
 	    android:orientation="horizontal"
+	    android:gravity="center"
 	    android:layout_weight="20">
 		
 	    <ImageButton
 	        android:id="@+id/player_back_button"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:src="@drawable/ic_launcher" />
+	        android:contentDescription="@string/access_back_button"
+	        android:background="@drawable/list_item_background_selector"
+	        android:src="@drawable/ic_back"
+	        />
 	    
 	    <ImageButton
 	        android:id="@+id/player_play_pause_button"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:src="@drawable/ic_launcher" />
+	        android:contentDescription="@string/access_play_pause_button"
+	        android:background="@drawable/list_item_background_selector"
+	        android:src="@drawable/ic_play" 
+	        />
 	    
 	    <ImageButton
 	        android:id="@+id/player_forward_button"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:src="@drawable/ic_launcher" />
+	        android:contentDescription="@string/access_forward_button"
+	        android:background="@drawable/list_item_background_selector"
+	        android:src="@drawable/ic_forward"
+	        />
 	</LinearLayout>
-    
     
 </LinearLayout>

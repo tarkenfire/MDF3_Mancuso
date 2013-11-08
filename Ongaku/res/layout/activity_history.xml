@@ -8,10 +8,10 @@
         android:id="@+id/history_header"
 	        android:layout_width="match_parent"
 	    	android:layout_height="wrap_content"
-	    	android:text="@string/library_header"
+	    	android:text="@string/button_history"
 	    	android:textSize="20sp"
 	    	android:textAlignment="center"
-	    	android:layout_marginLeft="3dp"
+	    	android:paddingLeft="10dp"
          />
     
         <ListView
@@ -21,6 +21,7 @@
 		   	android:background="#000000"
 		   	android:divider="#FFFFFF" 
 		   	android:listSelector="@drawable/list_item_background_selector"
+		   	android:dividerHeight="4dp"
          />
 
 </LinearLayout>

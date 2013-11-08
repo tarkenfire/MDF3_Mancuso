@@ -121,10 +121,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 			//while still having a binder to access the service.
 			Intent serviceIntent = new Intent(this, MusicService.class);
 			this.startService(serviceIntent);
-		}
-		//set action bar icon as backward navigation.
-		//TODO doesn't work.
-	    getActionBar().setDisplayHomeAsUpEnabled(true);		
+		}		
 	}
 	
 	@Override
@@ -169,11 +166,13 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 			if (musicService.isMusicPlaying())
 			{
 				musicService.pauseTrack();
+				playerPlayPauseButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_play));
 			}
 			else
 			{
 				musicService.pauseTrack();
 				musicService.playTrack();
+				playerPlayPauseButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_pause));
 			}
 			break;
 			
@@ -260,9 +259,4 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		}
 		
 	};
-
-
-
-	
-
 }
