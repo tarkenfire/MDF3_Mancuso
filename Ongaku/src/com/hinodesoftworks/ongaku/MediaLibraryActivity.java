@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 5, 2013
+ * Date: Nov 7, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -27,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MediaLibraryActivity.
  */
@@ -93,6 +92,9 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	}
 	
 	//interface methods
+	/* (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
@@ -120,6 +122,9 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 
 	
 	//private methods
+	/**
+	 * Callback fired when the file search is completed
+	 */
 	private void onFileSearchComplete()
 	{
 		AudioFileArrayAdapter adapter = new AudioFileArrayAdapter(this, R.layout.media_list_item, musicFileList);
@@ -127,6 +132,11 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	}
 	
 	//public methods
+	/**
+	 * Callback for button click
+	 *
+	 * @param v the view clicked
+	 */
 	public void onHistoryClick(View v)
 	{
 		Intent i = new Intent(this, HistoryActivity.class);
@@ -178,7 +188,7 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	}
 	
 	/**
-	 * Gets the extension of a string-form-uri/url
+	 * Gets the extension of a string-form-uri/url.
 	 *
 	 * @param url the string version of the uri or url
 	 * @return the extension of the file string

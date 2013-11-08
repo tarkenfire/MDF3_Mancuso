@@ -23,11 +23,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * The Class HistoryActivity.
+ */
 public class HistoryActivity extends Activity implements OnItemClickListener
 {
 	ArrayList<File> historyFiles;
 	ListView historyList;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -68,6 +74,9 @@ public class HistoryActivity extends Activity implements OnItemClickListener
 		historyList.setOnItemClickListener(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{

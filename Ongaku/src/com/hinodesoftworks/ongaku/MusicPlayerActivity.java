@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 5, 2013
+ * Date: Nov 7, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -29,7 +29,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MusicPlayerActivity.
  */
@@ -124,6 +123,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		}		
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onStart()
+	 */
 	@Override
 	protected void onStart()
 	{
@@ -133,6 +135,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		this.bindService(serviceIntent, serviceConnection, 0);
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onStop()
+	 */
 	@Override
 	protected void onStop()
 	{
@@ -145,6 +150,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 	}
 	
 	//on destroy may not always be called, but if it is, stop the service.
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onDestroy()
+	 */
 	@Override
 	protected void onDestroy()
 	{
@@ -153,6 +161,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		this.stopService(serviceIntent);
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v)
 	{
@@ -182,6 +193,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.widget.SeekBar.OnSeekBarChangeListener#onProgressChanged(android.widget.SeekBar, int, boolean)
+	 */
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser)
@@ -191,12 +205,18 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.SeekBar.OnSeekBarChangeListener#onStartTrackingTouch(android.widget.SeekBar)
+	 */
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar)
 	{
 		//do nothing
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.SeekBar.OnSeekBarChangeListener#onStopTrackingTouch(android.widget.SeekBar)
+	 */
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar)
 	{
@@ -215,12 +235,22 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 	}
 	
 	//public methods
+	/**
+	 * Sets the current duration.
+	 *
+	 * @param milSeconds the new current duration
+	 */
 	public void setCurrentDuration(int milSeconds)
 	{
 		currentTimeDisplay.setText(AudioFileArrayAdapter.getDurationStringFromMilSeconds(milSeconds));
 		progressBar.setProgress(milSeconds);
 	}
 	
+	/**
+	 * callback for when the mediaplayer begins playing a track
+	 *
+	 * @param milSeconds the mil seconds
+	 */
 	public void onPlaybackStarted(int milSeconds)
 	{
 		totalTimeDisplay.setText(AudioFileArrayAdapter.getDurationStringFromMilSeconds(milSeconds));
@@ -228,6 +258,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 	}
 	
 	//private methods
+	/**
+	 * Callback for when the service is bound.
+	 */
 	private void onServiceBound()
 	{
 		Intent i = this.getIntent();

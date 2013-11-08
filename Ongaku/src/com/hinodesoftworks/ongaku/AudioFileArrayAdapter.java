@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 5, 2013
+ * Date: Nov 7, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -19,6 +19,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AudioFileArrayAdapter.
+ */
 public class AudioFileArrayAdapter extends ArrayAdapter<File>
 {
 	int resourceId;
@@ -32,6 +36,13 @@ public class AudioFileArrayAdapter extends ArrayAdapter<File>
 	TextView trackDurationView;
 	
 	
+	/**
+	 * Instantiates a new audio file array adapter.
+	 *
+	 * @param context the context
+	 * @param resourceId the resource id
+	 * @param data the list of files
+	 */
 	public AudioFileArrayAdapter(Context context, int resourceId, ArrayList<File> data)
 	{
 		super(context, resourceId, data);
@@ -42,6 +53,9 @@ public class AudioFileArrayAdapter extends ArrayAdapter<File>
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
@@ -76,6 +90,12 @@ public class AudioFileArrayAdapter extends ArrayAdapter<File>
 	
 	
 	//utility methods
+	/**
+	 * Converts milliseconds into a formated time string.
+	 *
+	 * @param duration the milliseconds
+	 * @return the duration string formatted
+	 */
 	public static String getDurationStringFromMilSeconds(int duration)
 	{
 		StringBuilder sb = new StringBuilder();

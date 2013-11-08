@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 4, 2013
+ * Date: Nov 7, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -22,6 +22,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+/**
+ * The Class MusicService.
+ */
 public class MusicService extends Service implements OnPreparedListener
 {
 	private final IBinder _binder = new MusicBinder();
@@ -34,14 +37,26 @@ public class MusicService extends Service implements OnPreparedListener
 	Handler timeHandler = new Handler();
 	
 	//binder class for client activities
+	/**
+	 * The Class MusicBinder.
+	 */
 	public class MusicBinder extends Binder
 	{
+		
+		/**
+		 * Gets the service.
+		 *
+		 * @return the service
+		 */
 		MusicService getService()
 		{
 			return MusicService.this;
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Service#onBind(android.content.Intent)
+	 */
 	@Override
 	public IBinder onBind(Intent intent)
 	{
@@ -49,12 +64,18 @@ public class MusicService extends Service implements OnPreparedListener
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
+	 */
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
 		return super.onStartCommand(intent, flags, startId);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.media.MediaPlayer.OnPreparedListener#onPrepared(android.media.MediaPlayer)
+	 */
 	@Override
 	public void onPrepared(MediaPlayer player)
 	{
@@ -84,6 +105,12 @@ public class MusicService extends Service implements OnPreparedListener
 	
 	
 	//public methods
+	/**
+	 * Prepare media player.
+	 *
+	 * @param path the path of the file to play
+	 * @return true, if successful
+	 */
 	public boolean prepareMediaPlayer(String path)
 	{
 		if (mediaPlayer != null)
@@ -111,6 +138,9 @@ public class MusicService extends Service implements OnPreparedListener
 		return true;
 	}
 	
+	/**
+	 * Play track.
+	 */
 	public void playTrack()
 	{
 		if (isPlayerPrepared)
@@ -147,6 +177,9 @@ public class MusicService extends Service implements OnPreparedListener
 		}
 	}
 	
+	/**
+	 * Pause track.
+	 */
 	public void pauseTrack()
 	{
 		if (mediaPlayer.isPlaying())
@@ -156,39 +189,68 @@ public class MusicService extends Service implements OnPreparedListener
 		}
 	}
 	
+	/**
+	 * Seek to specific point in a track.
+	 *
+	 * @param milSeconds the mil seconds
+	 */
 	public void seekToPoint(int milSeconds)
 	{
 		if (isPlayerPrepared)
 			mediaPlayer.seekTo(milSeconds);
 	}
 	
+	/**
+	 * Seek forward five seconds.
+	 */
 	public void seekForwardFiveSeconds()
 	{
 		if (isPlayerPrepared)
 			mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
 	}
 	
+	/**
+	 * Seek backward five seconds.
+	 */
 	public void seekBackwardFiveSeconds()
 	{
 		if (isPlayerPrepared)
 			mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
 	}
 	
+	/**
+	 * Checks if is music playing.
+	 *
+	 * @return true, if music is playing
+	 */
 	public boolean isMusicPlaying() 
 	{
 		return mediaPlayer.isPlaying();
 	}
 	
+	/**
+	 * Stop track.
+	 */
 	public void stopTrack()
 	{
 		mediaPlayer.stop();
 	}
 	
+	/**
+	 * Sets a reference to the bound activity
+	 *
+	 * @param activity the new player instance reference
+	 */
 	public void setPlayerInstanceReference(MusicPlayerActivity activity)
 	{
 		_contextRef = activity;
 	}
 	
+	/**
+	 * Sets the file reference.
+	 *
+	 * @param file the new file reference
+	 */
 	public void setFileReference(File file)
 	{
 		_fileRef = file;
