@@ -21,6 +21,7 @@ import android.os.Environment;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -91,6 +92,27 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 		return true;
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+		switch (item.getItemId()){ 
+			case R.id.action_history:
+			{
+				Intent i = new Intent(this, HistoryActivity.class);
+				this.startActivity(i);
+				return true;
+			}
+			case R.id.action_settings:
+			{
+				Intent i = new Intent(this, SettingsActivity.class);
+				this.startActivity(i);
+				return true;
+			}
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
 	//interface methods
 	/* (non-Javadoc)
 	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
@@ -129,18 +151,6 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 	{
 		AudioFileArrayAdapter adapter = new AudioFileArrayAdapter(this, R.layout.media_list_item, musicFileList);
 		mediaList.setAdapter(adapter);
-	}
-	
-	//public methods
-	/**
-	 * Callback for button click
-	 *
-	 * @param v the view clicked
-	 */
-	public void onHistoryClick(View v)
-	{
-		Intent i = new Intent(this, HistoryActivity.class);
-		startActivity(i);
 	}
 	
 	

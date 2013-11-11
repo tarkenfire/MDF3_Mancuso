@@ -26,6 +26,7 @@
         
         <activity android:name="com.hinodesoftworks.ongaku.MusicPlayerActivity"></activity>
         <activity android:name="com.hinodesoftworks.ongaku.HistoryActivity"></activity>
+        <activity android:name="com.hinodesoftworks.ongaku.SettingsActivity"></activity>
         <service android:name="com.hinodesoftworks.ongaku.MusicService"></service>
     </application>
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference
+        android:key="pref_default_directory"
+        android:title="@string/pref_default_directory"
+        android:summary="@string/pref_default_directory_summary"
+        android:defaultValue="/mnt"
+         />
+    
+    <Preference
+        android:key="pref_clear_history"
+        android:title="@string/pref_clear_history"
+        android:summary="@string/pref_clear_history_summary"
+        />
+
+</PreferenceScreen>
