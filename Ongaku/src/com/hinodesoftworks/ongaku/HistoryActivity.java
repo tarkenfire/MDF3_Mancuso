@@ -14,10 +14,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -67,7 +69,12 @@ public class HistoryActivity extends Activity implements OnItemClickListener
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		
+		//grab actionbar
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true); 
+		actionBar.setHomeButtonEnabled(true);
 		
 		AudioFileArrayAdapter adapter = new AudioFileArrayAdapter(this, R.layout.media_list_item, historyFiles);
 		historyList.setAdapter(adapter);
@@ -85,6 +92,20 @@ public class HistoryActivity extends Activity implements OnItemClickListener
 		startActivity(i);
 		
 	}
+	
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem menuItem)
+    {       
+		switch (menuItem.getItemId())
+		{
+		case android.R.id.home:
+			onBackPressed();
+			break;
+		
+		}
+        return true;
+    }
 	
 
 }
