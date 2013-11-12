@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 
 import android.util.Log;
 import android.view.Menu;
@@ -58,13 +60,17 @@ public class MediaLibraryActivity extends Activity implements OnItemClickListene
 		//set listeners
 		mediaList.setOnItemClickListener(this);
 		
+		//get directory to search from prefs
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		final String dirToSearch = prefs.getString("pref_default_directory", "/mnt");
+		
 		//get music file contents
 		new Thread(new Runnable()
 		{
 			@Override
 			public void run()
 			{
-				searchDirectoryRecursive(new File("/mnt"));
+				searchDirectoryRecursive(new File(dirToSearch));
 				Log.i("Total track count", String.valueOf(musicFileList.size()));
 				
 				runOnUiThread(new Runnable()
