@@ -12,6 +12,7 @@ import java.io.File;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -33,6 +34,9 @@ public class MusicService extends Service implements OnPreparedListener
 	File _fileRef;
 	boolean isPlayerPrepared = false;
 	int currentTrackPosition = 0;
+	
+	//intent action for updating the widget
+	public static final String ACTION_UDPATE_WIDGET = "updateWidget";
 	
 	Handler timeHandler = new Handler();
 	
@@ -174,6 +178,13 @@ public class MusicService extends Service implements OnPreparedListener
 				.getNotification();
 			
 			this.startForeground(5, notification);
+			
+			//update any widgets to new track data.
+			Intent widgetIntent = new Intent(this, WidgetProvider.class);
+			widgetIntent.setAction(ACTION_UDPATE_WIDGET);
+			widgetIntent.putExtra("track", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+			widgetIntent.putExtra("artist", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
+			sendBroadcast(widgetIntent);
 		}
 	}
 	
