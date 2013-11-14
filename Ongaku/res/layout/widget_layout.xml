@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="#000000"
+    android:paddingTop="20dp" >
     
     <ImageView 
         android:id="@+id/widget_art_thumbnail"
-        android:layout_width="40dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher"
         android:contentDescription="@string/access_album_art"
@@ -15,13 +17,13 @@
     <LinearLayout 
         android:id="@+id/widget_string_container"
         android:layout_height="wrap_content"
-        android:layout_width="110dp"
+        android:layout_width="160dp"
         android:orientation="vertical"
         >
         <TextView
             android:id="@+id/widget_track_title"
             android:layout_height="match_parent"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/widget_track_placeholder"
@@ -30,7 +32,7 @@
         <TextView
             android:id="@+id/widget_artist_title"
             android:layout_height="match_parent"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/widget_artist_placeholder"
@@ -41,11 +43,12 @@
    
     <ImageButton 
         android:id="@+id/widget_pause_play_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/ic_play"
         android:contentDescription="@string/access_play_pause_button"
-        android:scaleType="fitXY"
+        android:background="@drawable/list_item_background_selector"
+        android:scaleType="fitCenter"
         />
     
 
