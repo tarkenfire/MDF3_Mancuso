@@ -12,7 +12,8 @@
 	<string name="access_album_art">Album Art</string>
 	<string name="access_back_button">Skip Back In Song</string>
 	<string name="access_play_pause_button">Play/Pause Song</string>
-	<string name="access_forward_button">Play/Pause Song</string>
+	<string name="access_forward_button">Skip Forward In Song</string>
+
 	
 	<string name="action_history">History</string>
 	
@@ -23,5 +24,8 @@
 	<string name="pref_clear_history_summary">This action cannot be undone</string>
 	
 	<string name="toast_history_cleared">History cleared</string>
+	
+	<string name="widget_track_placeholder">Track Name</string>
+	<string name="widget_artist_placeholder">Artist Name</string>
 	
 </resources>
