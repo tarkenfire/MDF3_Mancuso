@@ -8,19 +8,25 @@
 package com.hinodesoftworks.ongaku;
 
 import android.app.PendingIntent;
+import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 public class WidgetProvider extends AppWidgetProvider
 {
-	String tempArtist = "";
-	String tempTrack = "";
-	boolean tempIsPlaying = false;
+	String tempArtist = "Artist Name";
+	String tempTrack = "Track Name";
+	String tempAlbum = "Album Name";
 	
 
 	@Override
@@ -30,6 +36,7 @@ public class WidgetProvider extends AppWidgetProvider
 		{
 			tempArtist = intent.getStringExtra("artist");
 			tempTrack = intent.getStringExtra("track");
+			//tempImage = intent.getParcelableExtra("image");
 			
 			//onReceive will not fire onUpdate without an intent
 			//passing an array of ids, which is why I call it manually
@@ -61,11 +68,13 @@ public class WidgetProvider extends AppWidgetProvider
 		{
 			int currentId = appWidgetIds[i];
 			
-			//TODO REPLACE WITH FLEXABLE LAYOUT CODE.
-			RemoteViews widgetViews =  new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+			Bundle options = appWidgetManager.getAppWidgetOptions(currentId);
+			RemoteViews widgetViews =  getRemoteViews(context, options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT));
 			
 			widgetViews.setTextViewText(R.id.widget_artist_title, tempArtist);
 			widgetViews.setTextViewText(R.id.widget_track_title, tempTrack);
+			
+			
 			
 			//set intent for button.
 			Intent buttonIntent = new Intent(context, MediaLibraryActivity.class);
@@ -76,6 +85,50 @@ public class WidgetProvider extends AppWidgetProvider
 			appWidgetManager.updateAppWidget(currentId, widgetViews);
 		}
 		
+	}
+	
+	
+	
+	@Override
+	public void onAppWidgetOptionsChanged(Context context,
+			AppWidgetManager appWidgetManager, int appWidgetId,
+			Bundle newOptions)
+	{
+		int height = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT);
+		
+		appWidgetManager.updateAppWidget(appWidgetId, getRemoteViews(context, height));
+
+		super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId,
+				newOptions);
+	}
+
+
+	private RemoteViews getRemoteViews(Context context, int minHeight)
+	{
+		int numOfRows = numberOfCellsFromDP(minHeight);
+		
+		int layoutID = 0;
+		
+		switch (numOfRows)
+		{
+		case 1:
+			layoutID = R.layout.widget_layout;
+			break;
+		case 2:
+			layoutID = R.layout.widget_layout_2_row;
+			break;
+		case 3:
+			layoutID = R.layout.widget_layout_3_row;
+			break;
+		case 4:
+			layoutID = R.layout.widget_layout_4_row;
+			break;
+		}
+		
+		if (layoutID != 0)
+			return new RemoteViews(context.getPackageName(), layoutID);
+		else
+			return null;
 	}
 	
 	

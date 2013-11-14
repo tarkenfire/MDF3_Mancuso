@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:paddingTop="10dp" 
+   	>
+        
+        <ImageButton 
+	        android:id="@+id/widget_open_button"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:src="@drawable/ic_play"
+	        android:contentDescription="@string/access_play_pause_button"
+	        android:background="@drawable/list_item_background_selector"
+	        android:scaleType="fitCenter"
+	        android:layout_centerHorizontal="true"
+	      
+        />
+
+        <TextView
+            android:id="@+id/widget_track_title"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/widget_track_placeholder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/widget_open_button"
+            android:textAlignment="center"
+             />
+        
+        <TextView
+            android:id="@+id/widget_artist_title"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/widget_artist_placeholder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/widget_track_title"
+            android:textAlignment="center"
+             />
+        
+        <TextView
+            android:id="@+id/widget_album_title"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/widget_artist_placeholder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/widget_artist_title"
+            android:textAlignment="center"
+            />
+        
+</RelativeLayout>

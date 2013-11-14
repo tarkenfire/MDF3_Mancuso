@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="18" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -34,6 +34,7 @@
             android:name="com.hinodesoftworks.ongaku.WidgetProvider">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+				<action android:name="com.hinodesoftworks.UPDATE_WIDGET" />
    			</intent-filter>
    			
    			<meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info" />

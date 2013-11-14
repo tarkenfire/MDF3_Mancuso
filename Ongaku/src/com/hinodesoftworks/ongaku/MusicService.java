@@ -16,6 +16,8 @@ import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -38,7 +40,7 @@ public class MusicService extends Service implements OnPreparedListener
 	int currentTrackPosition = 0;
 	
 	//intent action for updating the widget
-	public static final String ACTION_UDPATE_WIDGET = "updateWidget";
+	public static final String ACTION_UDPATE_WIDGET = "com.hinodesoftworks.UPDATE_WIDGET";
 	
 	Handler timeHandler = new Handler();
 	
@@ -182,12 +184,16 @@ public class MusicService extends Service implements OnPreparedListener
 			this.startForeground(5, notification);
 			
 			//update any widgets to new track data.
-			Intent widgetIntent = new Intent(this, WidgetProvider.class);
+			//Intent widgetIntent = new Intent(this, WidgetProvider.class);
+			Intent widgetIntent = new Intent();
 			widgetIntent.setAction(ACTION_UDPATE_WIDGET);
 			
 			widgetIntent.putExtra("track", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
 			widgetIntent.putExtra("artist", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
-			widgetIntent.putExtra("is_playing", true);
+			widgetIntent.putExtra("album", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
+			widgetIntent.putExtra("genre", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE));
+			widgetIntent.putExtra("bitrate", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE));
+			widgetIntent.putExtra("duration", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
 			
 			sendBroadcast(widgetIntent);
 		}
