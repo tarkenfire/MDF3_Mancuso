@@ -42,7 +42,7 @@
     </LinearLayout>
    
     <ImageButton 
-        android:id="@+id/widget_pause_play_button"
+        android:id="@+id/widget_open_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_play"

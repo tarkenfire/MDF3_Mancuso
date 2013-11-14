@@ -1,5 +1,13 @@
+/* 
+ * Date: Nov 14, 2013
+ * Project: Ongaku
+ * Package: com.hinodesoftworks.ongaku
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.ongaku;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -20,7 +28,6 @@ public class WidgetProvider extends AppWidgetProvider
 	{
 		if (intent.getAction().equals(MusicService.ACTION_UDPATE_WIDGET))
 		{
-			Log.i("intent", "intent hit");
 			tempArtist = intent.getStringExtra("artist");
 			tempTrack = intent.getStringExtra("track");
 			
@@ -56,11 +63,35 @@ public class WidgetProvider extends AppWidgetProvider
 			
 			//TODO REPLACE WITH FLEXABLE LAYOUT CODE.
 			RemoteViews widgetViews =  new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+			
 			widgetViews.setTextViewText(R.id.widget_artist_title, tempArtist);
 			widgetViews.setTextViewText(R.id.widget_track_title, tempTrack);
 			
+			//set intent for button.
+			Intent buttonIntent = new Intent(context, MediaLibraryActivity.class);
+			PendingIntent buttonPI = PendingIntent.getActivity(context, 0, buttonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			
+			widgetViews.setOnClickPendingIntent(R.id.widget_open_button, buttonPI);
+			
 			appWidgetManager.updateAppWidget(currentId, widgetViews);
 		}
+		
+	}
+	
+	
+	//utility methods
+	private static int numberOfCellsFromDP(int dp)
+	{
+		//start at 2 to avoid trap in multiplying by 1.
+		int numOfCells = 2;
+		
+		//formula from ADR for home screen cell size from
+		//dp == 70 * n - 30, where n is number of cells
+		while (70 * numOfCells - 30 < dp)
+			++numOfCells;
+		
+		//result is one higher b/c of starting higher
+		return numOfCells - 1;
 		
 	}
 
