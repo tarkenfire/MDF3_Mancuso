@@ -193,7 +193,9 @@ public class MusicService extends Service implements OnPreparedListener
 			widgetIntent.putExtra("album", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
 			widgetIntent.putExtra("genre", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE));
 			widgetIntent.putExtra("bitrate", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE));
-			widgetIntent.putExtra("duration", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+			widgetIntent.putExtra("mime", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE));
+			widgetIntent.putExtra("date", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE));
+			
 			
 			sendBroadcast(widgetIntent);
 		}

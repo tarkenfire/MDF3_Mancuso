@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 14, 2013
+A * Date: Nov 14, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -28,6 +28,11 @@ public class WidgetProvider extends AppWidgetProvider
 	String tempTrack = "Track Name";
 	String tempAlbum = "Album Name";
 	
+	String tempGenre = "Genre";
+	String tempBitrate = "Fast";
+	String tempMime = "audio/mp3";
+	
+	String tempDate = "1/1/12";
 
 	@Override
 	public void onReceive(Context context, Intent intent)
@@ -36,7 +41,13 @@ public class WidgetProvider extends AppWidgetProvider
 		{
 			tempArtist = intent.getStringExtra("artist");
 			tempTrack = intent.getStringExtra("track");
-			//tempImage = intent.getParcelableExtra("image");
+			tempAlbum = intent.getStringExtra("album");
+			
+			tempGenre = intent.getStringExtra("genre");
+			tempBitrate = intent.getStringExtra("bitrate");
+			
+			tempMime = intent.getStringExtra("mime");
+			tempDate = intent.getStringExtra("date");
 			
 			//onReceive will not fire onUpdate without an intent
 			//passing an array of ids, which is why I call it manually
@@ -71,9 +82,26 @@ public class WidgetProvider extends AppWidgetProvider
 			Bundle options = appWidgetManager.getAppWidgetOptions(currentId);
 			RemoteViews widgetViews =  getRemoteViews(context, options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT));
 			
+			//items on all layouts
 			widgetViews.setTextViewText(R.id.widget_artist_title, tempArtist);
 			widgetViews.setTextViewText(R.id.widget_track_title, tempTrack);
+			widgetViews.setTextViewText(R.id.widget_album_title, tempAlbum);
 			
+			int numOfRows = numberOfCellsFromDP(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT));
+			
+			switch (numOfRows)
+			{
+			case 3: //layouts one and two have the same fields in them.
+				widgetViews.setTextViewText(R.id.widget_genre_title, tempGenre);
+				widgetViews.setTextViewText(R.id.widget_bitrate_label, tempBitrate + "bps");
+				break;
+			case 4:
+				widgetViews.setTextViewText(R.id.widget_genre_title, tempGenre);
+				widgetViews.setTextViewText(R.id.widget_bitrate_label, tempBitrate + "bps");
+				widgetViews.setTextViewText(R.id.widget_mimetype_label, tempMime);
+				widgetViews.setTextViewText(R.id.widget_date_label, tempDate);
+				break;
+			}
 			
 			
 			//set intent for button.
@@ -97,7 +125,7 @@ public class WidgetProvider extends AppWidgetProvider
 		int height = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT);
 		
 		appWidgetManager.updateAppWidget(appWidgetId, getRemoteViews(context, height));
-
+		
 		super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId,
 				newOptions);
 	}

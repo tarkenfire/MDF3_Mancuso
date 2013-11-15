@@ -27,5 +27,10 @@
 	
 	<string name="widget_track_placeholder">Track Name</string>
 	<string name="widget_artist_placeholder">Artist Name</string>
+	<string name="widget_album_placeholder">Album Name</string>
+	<string name="widget_genre_placeholder">Album Genre</string>
+	<string name="widget_bitrate_placeholder">Bitrate</string>
+	<string name="widget_mimetype_placeholder">Mime Type</string>
+	<string name="widget_date_placeholder">Date Created</string>
 	
 </resources>

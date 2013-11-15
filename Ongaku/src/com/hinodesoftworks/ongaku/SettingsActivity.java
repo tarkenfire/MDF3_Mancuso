@@ -9,6 +9,7 @@ package com.hinodesoftworks.ongaku;
 
 import java.io.File;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -29,6 +30,11 @@ public class SettingsActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true); 
+		actionBar.setHomeButtonEnabled(true);
 	}
 
+	
 }
