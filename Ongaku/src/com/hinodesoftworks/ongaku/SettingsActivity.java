@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 11, 2013
+ * Date: Nov 14, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -7,26 +7,23 @@
  */
 package com.hinodesoftworks.ongaku;
 
-import java.io.File;
-
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SettingsActivity.
+ */
 public class SettingsActivity extends Activity 
 {
 	//shell activity to host preference fragment
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -38,6 +35,9 @@ public class SettingsActivity extends Activity
 		actionBar.setHomeButtonEnabled(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
     public boolean onOptionsItemSelected(MenuItem menuItem)
     {       

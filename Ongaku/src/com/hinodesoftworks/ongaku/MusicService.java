@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 7, 2013
+ * Date: Nov 14, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -12,12 +12,7 @@ import java.io.File;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.appwidget.AppWidgetManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -27,6 +22,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MusicService.
  */
@@ -261,7 +257,7 @@ public class MusicService extends Service implements OnPreparedListener
 	}
 	
 	/**
-	 * Sets a reference to the bound activity
+	 * Sets a reference to the bound activity.
 	 *
 	 * @param activity the new player instance reference
 	 */

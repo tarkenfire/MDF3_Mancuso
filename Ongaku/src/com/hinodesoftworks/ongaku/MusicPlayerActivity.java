@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 7, 2013
+ * Date: Nov 14, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -32,6 +32,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MusicPlayerActivity.
  */
@@ -241,6 +242,9 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
     public boolean onOptionsItemSelected(MenuItem menuItem)
     {       
@@ -267,7 +271,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 	}
 	
 	/**
-	 * callback for when the mediaplayer begins playing a track
+	 * callback for when the mediaplayer begins playing a track.
 	 *
 	 * @param milSeconds the mil seconds
 	 */

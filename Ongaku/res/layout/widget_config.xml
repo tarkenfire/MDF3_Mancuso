@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:paddingTop="10dp"
+    android:background="#000000">
+    
+    <TextView 
+        android:id="@+id/config_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="@string/config_label_instructions"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp"
+        android:textSize = "26sp"
+        android:background="#2F2F2F"
+        android:maxLines="4"
+        android:layout_marginBottom="5dp"
+        />
+    
+    <TextView
+        android:id="@+id/config_red_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="@string/config_label_red"
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp"
+         />
+   	<SeekBar
+	    android:id="@+id/config_red_bar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="5dip"
+	    android:maxHeight="5dip"
+	    android:max="255"
+	    style="@android:style/Widget.ProgressBar.Horizontal"
+	    android:progressDrawable="@drawable/seek_bar_red"
+	    android:thumb="@drawable/thumb"
+	    />
+   	
+   	<TextView 
+		android:id="@+id/config_blue_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="@string/config_label_blue"
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp"
+   	    />
+ 	<SeekBar
+	    android:id="@+id/config_blue_bar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="5dip"
+	    android:maxHeight="5dip"
+	    android:max="255"
+	    style="@android:style/Widget.ProgressBar.Horizontal"
+	    android:progressDrawable="@drawable/seek_bar_blue"
+	    android:thumb="@drawable/thumb"
+	    />
+ 	
+ 	<TextView 
+ 	    android:id="@+id/config_green_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="@string/config_label_green"
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp"
+ 	    />
+	<SeekBar
+	    android:id="@+id/config_green_bar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="5dip"
+	    android:maxHeight="5dip"
+	    android:max="255"
+	    style="@android:style/Widget.ProgressBar.Horizontal"
+	    android:progressDrawable="@drawable/seek_bar_green"
+	    android:thumb="@drawable/thumb"
+	    />
+	
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="#FFFFFF"
+	    android:layout_marginTop="5dp">
+	
+		<Button 
+			android:id="@+id/config_create_button"
+	       	android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/list_item_background_selector"
+		    android:textColor="@color/list_item_text_color"
+		    android:text="@string/config_label_button"
+		    android:layout_margin="2dp"
+		    />
+   
+	</LinearLayout>
+    
+
+</LinearLayout>

@@ -1,5 +1,5 @@
 /* 
-A * Date: Nov 14, 2013
+ * Date: Nov 14, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -8,20 +8,21 @@ A * Date: Nov 14, 2013
 package com.hinodesoftworks.ongaku;
 
 import android.app.PendingIntent;
-import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WidgetProvider.
+ */
 public class WidgetProvider extends AppWidgetProvider
 {
 	String tempArtist = "Artist Name";
@@ -34,6 +35,9 @@ public class WidgetProvider extends AppWidgetProvider
 	String tempMime = "audio/mp3";
 	String tempDate = "1/1/12";
 
+	/* (non-Javadoc)
+	 * @see android.appwidget.AppWidgetProvider#onReceive(android.content.Context, android.content.Intent)
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent)
 	{
@@ -60,7 +64,12 @@ public class WidgetProvider extends AppWidgetProvider
 	}
 	
 	
-	//underloaded convience method to call onUpdate easier.
+
+	/**
+	 * 	Underloaded convenience method to call onUpdate easier.
+	 *
+	 * @param context the context
+	 */
 	public void onUpdate(Context context)
 	{
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -68,6 +77,9 @@ public class WidgetProvider extends AppWidgetProvider
 		onUpdate(context, appWidgetManager, appWidgetIds);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.appwidget.AppWidgetProvider#onUpdate(android.content.Context, android.appwidget.AppWidgetManager, int[])
+	 */
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds)
@@ -103,6 +115,30 @@ public class WidgetProvider extends AppWidgetProvider
 				break;
 			}
 			
+			//colors
+			//set color for text views
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			int textColor = prefs.getInt("pref_color", Color.WHITE);
+			
+			widgetViews.setTextColor(R.id.widget_artist_title, textColor);
+			widgetViews.setTextColor(R.id.widget_track_title, textColor);
+			widgetViews.setTextColor(R.id.widget_album_title, textColor);
+			
+			switch (numOfRows)
+			{
+			case 3:
+				widgetViews.setTextColor(R.id.widget_genre_title, textColor);
+				widgetViews.setTextColor(R.id.widget_bitrate_label, textColor);			
+				break;
+			case 4:
+				widgetViews.setTextColor(R.id.widget_genre_title, textColor);
+				widgetViews.setTextColor(R.id.widget_bitrate_label, textColor);
+				widgetViews.setTextColor(R.id.widget_mimetype_label, textColor);
+				widgetViews.setTextColor(R.id.widget_date_label, textColor);
+				break;
+				
+			}
+			
 			
 			//set intent for button.
 			Intent buttonIntent = new Intent(context, MediaLibraryActivity.class);
@@ -117,6 +153,9 @@ public class WidgetProvider extends AppWidgetProvider
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see android.appwidget.AppWidgetProvider#onAppWidgetOptionsChanged(android.content.Context, android.appwidget.AppWidgetManager, int, android.os.Bundle)
+	 */
 	@Override
 	public void onAppWidgetOptionsChanged(Context context,
 			AppWidgetManager appWidgetManager, int appWidgetId,
@@ -126,12 +165,21 @@ public class WidgetProvider extends AppWidgetProvider
 		
 		appWidgetManager.updateAppWidget(appWidgetId, getRemoteViews(context, height));
 		
+		onUpdate(context);
+		
 		super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId,
 				newOptions);
 	}
 
 
-	private RemoteViews getRemoteViews(Context context, int minHeight)
+	/**
+	 * Gets the remote views depending on number of cells in widget
+	 *
+	 * @param context the context
+	 * @param minHeight the min height
+	 * @return the remote views
+	 */
+	public static RemoteViews getRemoteViews(Context context, int minHeight)
 	{
 		int numOfRows = numberOfCellsFromDP(minHeight);
 		
@@ -161,7 +209,13 @@ public class WidgetProvider extends AppWidgetProvider
 	
 	
 	//utility methods
-	private static int numberOfCellsFromDP(int dp)
+	/**
+	 * Calculates Number of cells from dp.
+	 *
+	 * @param dp the dp of each cell
+	 * @return the int number of cells in widget
+	 */
+	public static int numberOfCellsFromDP(int dp)
 	{
 		//start at 2 to avoid trap in multiplying by 1.
 		int numOfCells = 2;

@@ -31,6 +31,12 @@
         <activity android:name="com.hinodesoftworks.ongaku.SettingsActivity"
             android:parentActivityName="com.hinodesoftworks.ongaku.MediaLibraryActivity"></activity>
         
+        <activity android:name=".WidgetConfigActivity">
+			<intent-filter>
+        		<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+    		</intent-filter>
+        </activity>
+        
         <service android:name="com.hinodesoftworks.ongaku.MusicService"></service>
         
         <receiver 

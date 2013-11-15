@@ -1,5 +1,5 @@
 /* 
- * Date: Nov 7, 2013
+ * Date: Nov 14, 2013
  * Project: Ongaku
  * Package: com.hinodesoftworks.ongaku
  * @author Michael Mancuso
@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class HistoryActivity.
  */
@@ -95,6 +96,9 @@ public class HistoryActivity extends Activity implements OnItemClickListener
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
     public boolean onOptionsItemSelected(MenuItem menuItem)
     {       

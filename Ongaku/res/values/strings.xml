@@ -33,4 +33,10 @@
 	<string name="widget_mimetype_placeholder">Mime Type</string>
 	<string name="widget_date_placeholder">Date Created</string>
 	
+	<string name="config_label_instructions">Use the sliders below to change the widget\'s text color. This text will preview the color you choose.</string>
+	<string name="config_label_red">Red:</string>
+	<string name="config_label_blue">Blue:</string>
+	<string name="config_label_green">Green:</string>
+	<string name="config_label_button">Create Widget</string>
+	
 </resources>

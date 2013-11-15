@@ -19,11 +19,18 @@ import android.preference.PreferenceFragment;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.widget.Toast;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SettingsFragment.
+ */
 public class SettingsFragment extends PreferenceFragment implements OnPreferenceClickListener, OnSharedPreferenceChangeListener
 {
 	EditTextPreference defaultDirectoryPref;
 	Preference clearHistoryPref;
 	
+	/* (non-Javadoc)
+	 * @see android.preference.PreferenceFragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -40,6 +47,9 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
 		clearHistoryPref.setOnPreferenceClickListener(this);
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onResume()
+	 */
 	@Override
 	public void onResume() {
 	    super.onResume();
@@ -47,6 +57,9 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
 	            .registerOnSharedPreferenceChangeListener(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onPause()
+	 */
 	@Override
 	public void onPause() {
 	    super.onPause();
@@ -55,6 +68,9 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see android.content.SharedPreferences.OnSharedPreferenceChangeListener#onSharedPreferenceChanged(android.content.SharedPreferences, java.lang.String)
+	 */
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
 	{
@@ -66,6 +82,9 @@ public class SettingsFragment extends PreferenceFragment implements OnPreference
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see android.preference.Preference.OnPreferenceClickListener#onPreferenceClick(android.preference.Preference)
+	 */
 	@Override
 	public boolean onPreferenceClick(Preference preference)
 	{
