@@ -21,6 +21,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -123,10 +124,6 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 			Intent serviceIntent = new Intent(this, MusicService.class);
 			this.startService(serviceIntent);
 			
-			//because the min API is below 16, which introduced simple
-			//one line "up" navigation, I'm "hacking" the actionbar home
-			//icon to simulate back functionality instead, which should work
-			//on an app of this small scale (3 activities)
 			ActionBar actionBar = getActionBar();
 			actionBar.setDisplayHomeAsUpEnabled(true); 
 			actionBar.setHomeButtonEnabled(true);
@@ -250,7 +247,7 @@ public class MusicPlayerActivity extends Activity implements OnClickListener, On
 		switch (menuItem.getItemId())
 		{
 		case android.R.id.home:
-			onBackPressed();
+			NavUtils.navigateUpFromSameTask(this);
 			break;
 		
 		}

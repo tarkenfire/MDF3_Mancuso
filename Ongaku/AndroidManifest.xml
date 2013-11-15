@@ -24,9 +24,12 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.hinodesoftworks.ongaku.MusicPlayerActivity"></activity>
-        <activity android:name="com.hinodesoftworks.ongaku.HistoryActivity"></activity>
-        <activity android:name="com.hinodesoftworks.ongaku.SettingsActivity"></activity>
+        <activity android:name="com.hinodesoftworks.ongaku.MusicPlayerActivity"
+            android:parentActivityName="com.hinodesoftworks.ongaku.MediaLibraryActivity"></activity>
+        <activity android:name="com.hinodesoftworks.ongaku.HistoryActivity"
+            android:parentActivityName="com.hinodesoftworks.ongaku.MediaLibraryActivity"></activity>
+        <activity android:name="com.hinodesoftworks.ongaku.SettingsActivity"
+            android:parentActivityName="com.hinodesoftworks.ongaku.MediaLibraryActivity"></activity>
         
         <service android:name="com.hinodesoftworks.ongaku.MusicService"></service>
         

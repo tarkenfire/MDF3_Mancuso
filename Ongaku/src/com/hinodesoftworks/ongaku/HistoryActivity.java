@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -100,7 +101,7 @@ public class HistoryActivity extends Activity implements OnItemClickListener
 		switch (menuItem.getItemId())
 		{
 		case android.R.id.home:
-			onBackPressed();
+			NavUtils.navigateUpFromSameTask(this);
 			break;
 		
 		}

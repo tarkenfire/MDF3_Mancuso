@@ -30,8 +30,8 @@ public class WidgetProvider extends AppWidgetProvider
 	
 	String tempGenre = "Genre";
 	String tempBitrate = "Fast";
-	String tempMime = "audio/mp3";
 	
+	String tempMime = "audio/mp3";
 	String tempDate = "1/1/12";
 
 	@Override

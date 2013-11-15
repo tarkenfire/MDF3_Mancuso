@@ -19,6 +19,8 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 public class SettingsActivity extends Activity 
@@ -36,5 +38,17 @@ public class SettingsActivity extends Activity
 		actionBar.setHomeButtonEnabled(true);
 	}
 
+	@Override
+    public boolean onOptionsItemSelected(MenuItem menuItem)
+    {       
+		switch (menuItem.getItemId())
+		{
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			break;
+		
+		}
+        return true;
+    }
 	
 }
