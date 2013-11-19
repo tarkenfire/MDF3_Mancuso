@@ -10,16 +10,12 @@ public class WebViewActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		//I am fragmenting the app as a best practice thing
+		//despite this app being so simple as to not really 
+		//need a fragment, especially since the UI is handled
+		//in a web view.
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_view);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.web_view, menu);
-		return true;
 	}
 
 }
