@@ -1,0 +1,19 @@
+#send-email
+{
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-label
+{
+    margin-top: 10px;
+}
+
+#subject-text
+{
+    height: 200px;
+    resize: none;
+}
+
+
