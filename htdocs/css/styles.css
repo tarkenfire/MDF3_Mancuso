@@ -1,3 +1,9 @@
+body
+{
+    background: url('img/background.png') !important;
+}
+
+
 #send-email
 {
     margin-right: 10px;

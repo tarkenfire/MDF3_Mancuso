@@ -29,7 +29,7 @@ var getAndSetData = function()
     if ($.trim(subject).length == 0 || $.trim(sendToUser).length == 0 || $.trim(sendToDomain).length == 0 )
     {
         //TEMP CODE, REPLACE WITH ANDROID CALLBACK
-        alert("Empty entry");
+        NativeInterface.displayToast("Subject and send-to information cannot be left blank.");
         return;
     }
     
@@ -47,6 +47,7 @@ var getAndSetData = function()
     //stringify has been in webkit since 2009, so will work for the webview.
     var jsonString = JSON.stringify(objectToSend);
     
+    NativeInterface.getAndSendData(jsonString);
     
 }
 

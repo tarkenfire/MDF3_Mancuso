@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,8 @@ public class WebViewFragment extends Fragment
 		
 		WebSettings settings = webView.getSettings();
 		settings.setJavaScriptEnabled(true);
-		webView.addJavascriptInterface(new WebJSInterface(this.getActivity().getBaseContext()), "NativeInterface");
+		
+		webView.addJavascriptInterface(new WebJSInterface(this.getActivity()), "NativeInterface");
 		
 		webView.loadUrl(uiUrl);  
 	}
