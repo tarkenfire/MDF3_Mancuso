@@ -12,6 +12,8 @@ import android.webkit.WebView;
 
 public class WebViewFragment extends Fragment
 {
+	private final String uiUrl = "http://www.tarkenfire.com/personal/htdocs/index.html";
+	
 	WebView webView;
 
 
@@ -26,8 +28,9 @@ public class WebViewFragment extends Fragment
 		
 		WebSettings settings = webView.getSettings();
 		settings.setJavaScriptEnabled(true);
+		webView.addJavascriptInterface(new WebJSInterface(this.getActivity().getBaseContext()), "NativeInterface");
 		
-		webView.loadUrl("file:///android_asset/htdocs/index.html");  
+		webView.loadUrl(uiUrl);  
 	}
 
 	@Override
