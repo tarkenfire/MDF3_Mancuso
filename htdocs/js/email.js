@@ -23,7 +23,7 @@ var getAndSetData = function()
     var carbon3User = $("#cc-user-3").val();
     var carbon3Domain = $("#cc-domain-3").val();
     
-    var emailBody = $("#nody-text").val();
+    var emailBody = $("#body-text").val();
     
     //validation. Emails require at least a send to address and a subject. Everything else is optional.
     if ($.trim(subject).length == 0 || $.trim(sendToUser).length == 0 || $.trim(sendToDomain).length == 0 )

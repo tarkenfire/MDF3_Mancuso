@@ -1,12 +1,23 @@
+/* 
+ * Date: Nov 21, 2013
+ * Project: Kongou
+ * Package: com.hinodesoftworks.kongou
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.kongou;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
-
+/**
+ * The Class WebViewActivity.
+ */
 public class WebViewActivity extends Activity
 {
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
